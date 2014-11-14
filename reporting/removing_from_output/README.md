@@ -9,6 +9,6 @@ test_object test@localhost /tmp $ echo -e 'test_object \n'
 test_object  
   
 test@localhost /tmp $ echo -e 'test_object \r'  
-test_object
+test_object  
 test@localhost /tmp $ echo -e 'test_object \r' |./remove_lines  
 test_object test@localhost /tmp $ 
