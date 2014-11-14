@@ -18,7 +18,7 @@ lastpage=$(pdfinfo $filename|awk '/Pages/ { print $2 }')
 pdftotext -f 1 -l $lastpage -layout -nopgbrk $filename
 filetxt=$(echo $filename|sed 's/...$/txt/')
 grep -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])' $filetxt|awk '!/213.53.134.0|62.190.106.0|62.189.190.137|194.7.150.240/'
-
+rm $filetxt
 
 # The ip address which are deleted by the awk command are Verizon Business IP's
 # Note unfortunately sometimes it will list paragraph numbers which could be IP's for instance
