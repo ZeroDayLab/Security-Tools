@@ -15,7 +15,7 @@ TMP=$(mktemp -d)
 #Debugging echo "Directory made :"$TMP
 #Debugging echo "Nohup.out is located :"$TMP"/nohup.out"
 cd $TMP
-# timeout is set to 10 seconds then it will send a SIGKILL signal to this script
+# timeout is set to 5 seconds then it will send a SIGKILL signal to this script
 timeout -s 9 5 nohup ssh -vv $ip
 
 a=$(awk 'BEGIN {FS=",";} NR==35 { for (i=3; i<=NF;i++) print $i}' $TMP/nohup.out|awk '!/ecdh/')
