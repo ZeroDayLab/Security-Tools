@@ -12,8 +12,8 @@ exit
 fi
 
 TMP=$(mktemp -d)
-#Debugging echo "Directory made :"$TMP
-#Debugging echo "Nohup.out is located :"$TMP"/nohup.out"
+echo "Directory made :"$TMP
+echo "Nohup.out is located :"$TMP"/nohup.out"
 cd $TMP
 # timeout is set to 5 seconds then it will send a SIGKILL signal to this script
 timeout -s 9 5 nohup ssh -vv $ip
@@ -23,7 +23,7 @@ b=$(awk 'BEGIN {FS=",";} NR==36 { for (j=2; j<=NF;j++) print $j}' $TMP/nohup.out
 c=$(awk 'BEGIN {FS=",";} NR==37 { for (k=3; k<=NF;k++) print $j}' $TMP/nohup.out|sort|awk '!/ecdh/')
 d=$(awk 'BEGIN {FS=",";} NR==39 { for (l=3; l<=NF;l++) print $k}' $TMP/nohup.out|sort)
 echo "=============================="
-echo "Kex Algorithms" $(awk 'END{print FNR}' $l)
+echo "Kex Algorithms"
 echo "=============================="
 for m in $a;do echo $m;done
 echo "=============================="
