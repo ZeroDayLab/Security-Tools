@@ -19,8 +19,7 @@ New-Mimiikatz64Script -MimiBin /path/to/64bit/mimikatz.exe -OutFile Invoke-Custo
   To build an Invoke-Mimikatz script containing both 32 and 64 bits:
   ```
 Import-Module /path/to/module/MimiPrepare.ps1
-New-MimiikatzScript -MimiBin64 /path/to/64bit/mimikatz.exe -MimiBin32 /path/to/32bit/mimikatz.exe -OutFile Invoke-Custo
-mMimikatz.ps1
+New-MimiikatzScript -MimiBin64 /path/to/64bit/mimikatz.exe -MimiBin32 /path/to/32bit/mimikatz.exe -OutFile Invoke-CustomMimikatz.ps1
   ```
 
 ### Todo
