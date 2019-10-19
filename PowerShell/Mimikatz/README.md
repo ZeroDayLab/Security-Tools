@@ -8,7 +8,7 @@ PowerShell script to automate building Invoke-Mimikatz scripts with custom mimik
 
 ### Usage
 
-  *You might need to bypass AMSI before importing the script*
+  **You might need to bypass AMSI before importing the script**
 
   To build a 64bit only Invoke-Mimikatz script:
   ```
