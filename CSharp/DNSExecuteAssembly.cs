@@ -55,10 +55,14 @@ namespace DNSExecuteAssembly
                 Console.WriteLine("  keywords: iv = Inveigh");
                 Console.WriteLine("            mk = Mimikatz");
                 Console.WriteLine("            sb = Seatbelt");
+                Console.WriteLine("            sc = SharpChrome");
+                Console.WriteLine("            sd = SharpDPAPI");
                 Console.WriteLine("            sh = SharpHound");
                 Console.WriteLine("            sr = SharpRoast");
+                Console.WriteLine("            ss = SharpSpray");
                 Console.WriteLine("            su = SharpUp");
                 Console.WriteLine("            sv = SharpView");
+                Console.WriteLine("            sw = SharpWMI");
                 Console.WriteLine("            ru = Rubeus");
                 Console.WriteLine("            wt = Watson");
                 return;
